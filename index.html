@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JS Log Viewer</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="toolbar">
+        <div>
+          <h1>JS Log Viewer</h1>
+          <p id="fileSummary">Select a local log file to inspect parsed deployment entries.</p>
+        </div>
+        <label class="file-picker">
+          <input id="fileInput" type="file" accept=".log,.txt,text/plain" />
+          Choose file
+        </label>
+      </header>
+
+      <div class="content-layout">
+        <section class="filters" aria-label="Log filters">
+          <div class="filter-field">
+            <label for="timeFrom">From</label>
+            <input id="timeFrom" type="datetime-local" />
+          </div>
+          <div class="filter-field">
+            <label for="timeTo">To</label>
+            <input id="timeTo" type="datetime-local" />
+          </div>
+          <div class="filter-field">
+            <label for="itemIdFilter">Item Id</label>
+            <input id="itemIdFilter" type="search" placeholder="DQ1234" />
+          </div>
+          <fieldset class="mode-switch">
+            <legend>Item Id Mode</legend>
+            <label>
+              <input type="radio" name="itemMode" value="filter" checked />
+              <span>Filter</span>
+            </label>
+            <label>
+              <input type="radio" name="itemMode" value="highlight" />
+              <span>Highlight</span>
+            </label>
+          </fieldset>
+          <div class="filter-field">
+            <label for="destinationFilter">Destination</label>
+            <input id="destinationFilter" type="search" placeholder="" />
+          </div>
+          <fieldset class="mode-switch">
+            <legend>Destination Mode</legend>
+            <label>
+              <input type="radio" name="destinationMode" value="filter" checked />
+              <span>Filter</span>
+            </label>
+            <label>
+              <input type="radio" name="destinationMode" value="highlight" />
+              <span>Highlight</span>
+            </label>
+          </fieldset>
+          <label class="checkbox-filter">
+            <input id="incomingRequestsFilter" type="checkbox" />
+            <span>Incoming requests</span>
+          </label>
+        </section>
+
+        <section class="table-wrap" aria-live="polite">
+          <table>
+            <thead>
+              <tr>
+                <th>Time</th>
+                <th>Level</th>
+                <th>Item Id</th>
+                <th>Status</th>
+                <th>Destination</th>
+                <th>Deployment Step</th>
+                <th>Substep</th>
+                <th>Message / Raw Line</th>
+              </tr>
+            </thead>
+            <tbody id="logRows">
+              <tr class="empty-row">
+                <td colspan="8">No file selected.</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+      </div>
+    </main>
+
+    <dialog id="jsonDialog" class="json-dialog">
+      <div class="dialog-header">
+        <h2>JSON</h2>
+        <button id="jsonDialogClose" class="icon-button" type="button" aria-label="Close popup">
+          x
+        </button>
+      </div>
+      <pre id="jsonDialogContent"></pre>
+    </dialog>
+
+    <script src="app.js"></script>
+  </body>
+</html>
