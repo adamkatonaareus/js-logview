@@ -139,7 +139,7 @@ function applyFilters() {
   const annotatedLines = filteredLines.map((line) => ({
     ...line,
     highlights: getHighlights(line, filters),
-4  }));
+  }));
 
   renderRows(annotatedLines, "No log lines match the active filters.");
   updateSummary(annotatedLines.length);
